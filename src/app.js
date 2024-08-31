@@ -2,6 +2,8 @@ import express from "express";
 
 const app = express();
 
+app.use(express.json({ limit: "16kb" }));
+
 // routes import here
 import eventsRouter from "./routes/events.route.js";
 

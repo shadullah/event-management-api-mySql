@@ -21,10 +21,8 @@ connectDb()
     return connection.query("SELECT 1");
   })
   .then(() => {
-    console.log("my sql db connected");
-
     app.listen(port, () => {
-      console.log(`Example app listening on port ${port}`);
+      console.log(`Server is running at port ${port}`);
     });
   })
   .catch((err) => {
