@@ -6,7 +6,7 @@ This website is built using Javascript, NodeJs, ExpressJs, MySQL, Postman, Netli
 
 Watch Live backend url demo here:
 
-<a href="https://lazz-pharma-backend-production.up.railway.app/">lazz pharma backend</a>
+<a href="https://lazz-pharma-backend-production.up.railway.app/">Event management backend</a>
 
 
 ## Installation
