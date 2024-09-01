@@ -6,7 +6,7 @@ This website is built using Javascript, NodeJs, ExpressJs, MySQL, Postman, Netli
 
 Watch Live backend url demo here:
 
-<a href="https://event-management-123.netlify.app/">Event management backend</a>
+<a href="https://event-management-api-my-sql.vercel.app/">Event management backend</a>
 
 
 ## Installation
