@@ -178,10 +178,127 @@ const deleteAnEvent = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, removeEvent, "deleted event successfully!!"));
 });
 
+// Add participants to event
+const addParticipantsInEvent = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { email } = req.body;
+
+  if (!email) {
+    throw new ApiError(500, "email not given");
+  }
+
+  const [eventExists] = await connection.query(
+    `SELECT * FROM events WHERE Event_ID=?`,
+    [id]
+  );
+  if (eventExists.length === 0) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  let [participant] = await connection.query(
+    `SELECT * FROM participants WHERE Email = ?`,
+    [email]
+  );
+
+  if (participant.length === 0) {
+    const [newParticipant] = await connection.query(
+      `INSERT INTO participants(Email) VALUES (?)`,
+      [email]
+    );
+    participant = [{ Participant_id: newParticipant.insertId }];
+  }
+
+  const [createParticipant] = await connection.query(
+    `INSERT INTO event_participants(Event_ID, Participant_id) VALUES(?, ?)`,
+    [id, participant[0].Participant_id]
+  );
+
+  if (createParticipant.affectedRows === 0) {
+    throw new ApiError(400, "participant not created");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        createParticipant,
+        "participant added to event successfully"
+      )
+    );
+});
+
+// get events with participants
+const getEventsParticipants = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    throw new ApiError(500, "id not given");
+  }
+
+  const [eventParticpants] = await connection.query(
+    `SELECT * FROM event_participants WHERE Event_ID = ?`,
+    [id]
+  );
+
+  if (eventParticpants.affectedRows === 0) {
+    throw new ApiError(404, "No event participants found");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        eventParticpants,
+        "event participants fetched successfully!!"
+      )
+    );
+});
+
+// remove participants from an event
+const removeAnParticipant = asyncHandler(async (req, res) => {
+  const { id, participantId } = req.params;
+
+  if (!(id || participantId)) {
+    throw new ApiError(500, "event id or participant id not given");
+  }
+
+  const [eventExists] = await connection.query(
+    `SELECT * FROM events WHERE Event_ID=?`,
+    [id]
+  );
+  if (eventExists.length === 0) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  const [DeleteParticipantFromEvent] = await connection.query(
+    `DELETE FROM event_participants WHERE Event_ID = ? AND Participant_id =?`,
+    [id, participantId]
+  );
+
+  if (DeleteParticipantFromEvent.affectedRows === 0) {
+    throw new ApiError(400, "Delete participant failed");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        DeleteParticipantFromEvent,
+        "Deleted participant successfull"
+      )
+    );
+});
+
 export {
   getAllEvents,
   getEventsById,
   createEvents,
   updateAnEvent,
   deleteAnEvent,
+  addParticipantsInEvent,
+  getEventsParticipants,
+  removeAnParticipant,
 };

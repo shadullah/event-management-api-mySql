@@ -8,6 +8,6 @@ app.use(express.json({ limit: "16kb" }));
 import eventsRouter from "./routes/events.route.js";
 
 //  routes declaration
-app.use("/api/v1/events", eventsRouter);
+app.use("/api/v1/", eventsRouter);
 
 export { app };
