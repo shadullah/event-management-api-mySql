@@ -1,6 +1,6 @@
 # Event-management-with-Node-MySQL
 
-This website is built using Javascript, NodeJs, ExpressJs, MySQL, Postman, Netlify.
+This website is built using Javascript, NodeJs, ExpressJs, MySQL, Postman, Vercel.
 
 ## Live Demo
 
@@ -41,5 +41,5 @@ removeParticipants: https://event-management-api-airrepo.vercel.app/api/v1/event
 - ExpressJs
 - MySQL
 - Postman
-- Netlify
+- Vercel
 
