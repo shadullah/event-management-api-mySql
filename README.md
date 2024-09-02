@@ -8,6 +8,12 @@ Watch Live backend url demo here:
 
 <a href="https://event-management-api-airrepo.vercel.app/">Event management backend</a>
 
+## Pull from docker
+
+```bash
+docker pull hexa7675/event-api:0.0.1.RELEASE
+```
+
 
 ## Installation
 
