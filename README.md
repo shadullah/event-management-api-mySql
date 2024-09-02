@@ -23,6 +23,8 @@ To run the project, use the following command:
 npm run dev
 ```
 
+## Routes of the Project
+
 ```Routes
 GetAllevents: https://event-management-api-airrepo.vercel.app/api/v1/events
 getEventsById: https://event-management-api-airrepo.vercel.app/api/v1/events/:id
