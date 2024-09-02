@@ -12,7 +12,7 @@ const port = process.env.PORT || 8000;
 
 // main route
 app.get("/", (req, res) => {
-  res.send("Welcome to Event management Api with Mysql");
+  res.send("Welcome to Event management Api with Mysql & docker");
 });
 
 // db listen
